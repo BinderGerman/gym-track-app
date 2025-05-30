@@ -8,6 +8,7 @@ import {
 import { routes } from "@/constants/dashboard-routes-config";
 import { LogoTitle } from "./logo-title";
 import { NavMain } from "./nav-main";
+import { NavUser } from "./nav-user";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -18,7 +19,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={routes} />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter className="mb-4">
+        <NavUser />
+      </SidebarFooter>  
     </Sidebar>
   );
 }

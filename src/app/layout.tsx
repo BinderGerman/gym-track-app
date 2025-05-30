@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import { esES } from "@clerk/localizations";
 
 const geistSans = Geist({
@@ -27,7 +26,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }} localization={esES}>
+    <ClerkProvider 
+      appearance={{
+        
+        elements: {
+          userButtonPopoverCard: "bg-background border border-border text-foreground",
+          userButtonPopoverActionButton: "text-foreground hover:bg-accent hover:text-accent-foreground",
+          userButtonPopoverFooter: "border-border",
+          userPreview: "text-foreground",
+          userButtonPopoverActionButtonText: "text-foreground",
+        },
+      }}
+      localization={esES}
+    >
       <html lang="es" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
