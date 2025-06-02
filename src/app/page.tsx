@@ -1,104 +1,124 @@
-import Image from "next/image";
+//import Image from "next/image";
 import { ModeToggle } from "@/components/theme/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Users, Dumbbell, Brain, CheckCircle } from "lucide-react";
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <ModeToggle />
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <ModeToggle />
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              Gestiona tus clientes y rutinas con{" "}
+              <span className="text-primary">inteligencia artificial</span>
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              La plataforma más completa para entrenadores personales. Optimiza tu tiempo y mejora los resultados de tus alumnos.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button size="lg">
+                Prueba gratis 14 días
+              </Button>
+              <Button size="lg" variant="outline">
+                Iniciar sesión
+              </Button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 bg-muted/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+              <Users className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Gestión de Alumnos</h3>
+              <p className="text-muted-foreground">
+                Organiza la información de tus clientes, seguimiento de progreso y objetivos personalizados.
+              </p>
+            </Card>
+            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+              <Dumbbell className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">Biblioteca de Ejercicios</h3>
+              <p className="text-muted-foreground">
+                Accede a una amplia biblioteca de ejercicios y crea rutinas personalizadas fácilmente.
+              </p>
+            </Card>
+            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+              <Brain className="w-12 h-12 text-primary mb-4" />
+              <h3 className="text-xl font-semibold mb-2">IA Asistente</h3>
+              <p className="text-muted-foreground">
+                Optimiza las rutinas con recomendaciones basadas en inteligencia artificial.
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">¿Por qué elegir nuestra plataforma?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-2">Ahorra Tiempo</h3>
+                <p className="text-muted-foreground">
+                  Automatiza la creación de rutinas y seguimiento de progreso.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-2">Mejores Resultados</h3>
+                <p className="text-muted-foreground">
+                  Optimiza el progreso de tus alumnos con IA y análisis de datos.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-2">Fácil de Usar</h3>
+                <p className="text-muted-foreground">
+                  Interfaz intuitiva diseñada para optimizar tu flujo de trabajo.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold mb-2">Soporte Premium</h3>
+                <p className="text-muted-foreground">
+                  Asistencia personalizada para resolver todas tus dudas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Comienza hoy mismo a optimizar tu trabajo
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            14 días de prueba gratis, sin compromiso
+          </p>
+          <Button size="lg" variant="secondary">
+            Crear cuenta gratis
+          </Button>
+        </div>
+      </section>
+    </main>
   );
 }
