@@ -1,124 +1,317 @@
-//import Image from "next/image";
+"use client"
+import Image from "next/image";
 import { ModeToggle } from "@/components/theme/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Users, Dumbbell, Brain, CheckCircle } from "lucide-react";
+import { Users, Dumbbell, Brain, CheckCircle, Star, Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-background">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo/Brand */}
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center gap-2">
+                <Image src="/gym-track-logo.png" alt="Logo de Gym Track" width={32} height={32} />
+                <span className="text-xl font-bold text-foreground">Gym Track</span>
+              </Link>
+            </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center justify-center flex-1">
+              <div className="flex gap-8 text-muted-foreground">
+                <Link href="#features" className="hover:text-foreground transition-colors duration-200">Características</Link>
+                <Link href="#benefits" className="hover:text-foreground transition-colors duration-200">Beneficios</Link>
+                <Link href="#testimonials" className="hover:text-foreground transition-colors duration-200">Testimonios</Link>
+                <Link href="#pricing" className="hover:text-foreground transition-colors duration-200">Precios</Link>
+              </div>
+            </div>
+
+            {/* Desktop Auth Buttons */}
+            <div className="hidden lg:flex items-center gap-4">
+              <ModeToggle />
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/sign-in">Iniciar Sesión</Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link href="/sign-up">Probar Gratis</Link>
+              </Button>
+            </div>
+
+            {/* Mobile/Tablet Menu Button */}
+            <div className="flex items-center gap-4 lg:hidden">
+              <ModeToggle />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                {isMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobile/Tablet Navigation */}
+          <div
+            className={`lg:hidden transition-all duration-300 ease-in-out ${
+              isMenuOpen
+                ? "max-h-96 opacity-100 py-4"
+                : "max-h-0 opacity-0 overflow-hidden"
+            }`}
+          >
+            <div className="flex flex-col gap-4 px-2 pb-3">
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="#features"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Características
+                </Link>
+                <Link
+                  href="#benefits"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Beneficios
+                </Link>
+                <Link
+                  href="#testimonials"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Testimonios
+                </Link>
+                <Link
+                  href="#pricing"
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-lg"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Precios
+                </Link>
+              </div>
+              <div className="flex flex-col gap-2 pt-4 border-t border-border">
+                <Button variant="ghost" size="lg" className="w-full justify-start text-lg" asChild>
+                  <Link href="/sign-in">Iniciar Sesión</Link>
+                </Button>
+                <Button size="lg" className="w-full justify-start text-lg" asChild>
+                  <Link href="/sign-up">Probar Gratis</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
-      <ModeToggle />
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-              Gestiona tus clientes y rutinas con{" "}
-              <span className="text-primary">inteligencia artificial</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              La plataforma más completa para entrenadores personales. Optimiza tu tiempo y mejora los resultados de tus alumnos.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button size="lg">
-                Prueba gratis 14 días
-              </Button>
-              <Button size="lg" variant="outline">
-                Iniciar sesión
-              </Button>
+      <section className="relative overflow-hidden pt-28 md:pt-24 pb-16 md:pb-24">
+        <div className="absolute inset-0">
+          <Image
+            src="/gym-background.jpg"
+            alt="Fondo de Gimnasio"
+            fill
+            priority
+            quality={100}
+            className="object-cover object-center opacity-65 dark:opacity-55"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/50 to-background/80"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Hero Content */}
+            <div className="text-center md:text-left">
+              <h1 className="text-4xl md:text-6xl font-extrabold text-foreground mb-6 leading-tight">
+                Potencia el <span className="text-primary">Entrenamiento de tus Alumnos</span> con IA
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8 max-w-lg md:max-w-xl mx-auto md:mx-0">
+                Gestiona y optimiza el progreso de tus alumnos, crea planes personalizados y utiliza la IA para maximizar sus resultados. Todo en una plataforma diseñada para entrenadores profesionales.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <Button size="lg" className="text-lg px-8 py-6 hover:scale-105 transition-transform duration-200" asChild>
+                  <Link href="/sign-up">Comenzar Prueba Gratuita</Link>
+                </Button>
+              </div>
+            </div>
+            {/* Hero Image */}
+            <div className="flex justify-center md:justify-end">
+              <Image
+                src="/trainer-client.png"
+                alt="Entrenador con cliente"
+                width={500}
+                height={500}
+                className="rounded-lg shadow-xl object-cover hover:scale-105 transition-transform duration-300"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-muted/50">
+      <section id="features" className="py-16 bg-muted/50 scroll-mt-16 relative isolate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Características Principales</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <Users className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Gestión de Alumnos</h3>
+              <h3 className="text-xl font-semibold mb-2 text-foreground">Gestión de Clientes</h3>
               <p className="text-muted-foreground">
-                Organiza la información de tus clientes, seguimiento de progreso y objetivos personalizados.
+                Organiza datos de clientes, realiza seguimiento de progreso, establece objetivos y comunícate eficientemente todo en un solo lugar.
               </p>
             </Card>
-            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <Dumbbell className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Biblioteca de Ejercicios</h3>
+              <h3 className="text-xl font-semibold mb-2 text-foreground">Biblioteca de Ejercicios</h3>
               <p className="text-muted-foreground">
-                Accede a una amplia biblioteca de ejercicios y crea rutinas personalizadas fácilmente.
+                Accede a una extensa biblioteca de ejercicios y crea rutinas personalizadas para cada cliente de manera sencilla.
               </p>
             </Card>
-            <Card className="p-6 bg-card hover:shadow-lg transition-shadow">
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
               <Brain className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-xl font-semibold mb-2">IA Asistente</h3>
+              <h3 className="text-xl font-semibold mb-2 text-foreground">Insights con IA</h3>
               <p className="text-muted-foreground">
-                Optimiza las rutinas con recomendaciones basadas en inteligencia artificial.
+                Obtén recomendaciones inteligentes para ajustar entrenamientos y optimizar el progreso de tus clientes.
               </p>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-16">
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-16 scroll-mt-16 relative isolate">
+        <div className="absolute inset-0">
+          <Image
+            src="/gym-background-II.jpg"
+            alt="Fondo de Gimnasio"
+            fill
+            quality={100}
+            className="object-cover object-center opacity-65 dark:opacity-55"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/50 to-background/80"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Lo que Dicen Nuestros Usuarios</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4">
+                &ldquo;Gym Track ha revolucionado la forma en que gestiono mis clientes. ¡Las sugerencias de IA son increíblemente útiles!&rdquo;
+              </p>
+              <p className="font-semibold text-foreground">- Sara, Entrenadora Personal</p>
+            </Card>
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4">
+                &ldquo;La planificación de entrenamientos es intuitiva y me ahorra mucho tiempo. A mis clientes les encantan las rutinas personalizadas.&rdquo;
+              </p>
+              <p className="font-semibold text-foreground">- Marcos, Entrenador de Fuerza</p>
+            </Card>
+            <Card className="p-6 bg-card hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                ))}
+              </div>
+              <p className="text-muted-foreground mb-4">
+                &ldquo;¡Finalmente, una plataforma que entiende las necesidades de un profesional del fitness. ¡Altamente recomendada!&rdquo;
+              </p>
+              <p className="font-semibold text-foreground">- Emilia, Instructora de Fitness</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-16 bg-muted/50 scroll-mt-16 relative isolate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">¿Por qué elegir nuestra plataforma?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold mb-2">Ahorra Tiempo</h3>
-                <p className="text-muted-foreground">
-                  Automatiza la creación de rutinas y seguimiento de progreso.
-                </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Precios Simples y Transparentes</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto">
+            <Card className="p-8 bg-card text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-16 translate-x-16"></div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Profesional</h3>
+              <p className="text-muted-foreground mb-4">Para entrenadores individuales</p>
+              <div className="text-4xl font-bold text-primary mb-6">$29<span className="text-lg text-muted-foreground">/mes</span></div>
+              <ul className="text-left text-muted-foreground space-y-3 mb-8">
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Clientes ilimitados</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Acceso a todas las funciones</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Insights con IA</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Soporte por email</li>
+              </ul>
+              <Button size="lg" className="w-full hover:scale-105 transition-transform duration-200" asChild>
+                <Link href="/sign-up">Comenzar Ahora</Link>
+              </Button>
+            </Card>
+            <Card className="p-8 bg-card text-center border-2 border-primary hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-16 translate-x-16"></div>
+              <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                Popular
               </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold mb-2">Mejores Resultados</h3>
-                <p className="text-muted-foreground">
-                  Optimiza el progreso de tus alumnos con IA y análisis de datos.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold mb-2">Fácil de Usar</h3>
-                <p className="text-muted-foreground">
-                  Interfaz intuitiva diseñada para optimizar tu flujo de trabajo.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold mb-2">Soporte Premium</h3>
-                <p className="text-muted-foreground">
-                  Asistencia personalizada para resolver todas tus dudas.
-                </p>
-              </div>
-            </div>
+              <h3 className="text-2xl font-bold mb-4 text-foreground">Empresarial</h3>
+              <p className="text-muted-foreground mb-4">Para gimnasios y equipos</p>
+              <div className="text-4xl font-bold text-primary mb-6">$59<span className="text-lg text-muted-foreground">/mes</span></div>
+              <ul className="text-left text-muted-foreground space-y-3 mb-8">
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Todo lo de Profesional</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Múltiples cuentas de entrenador</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Colaboración en equipo</li>
+                <li className="flex items-center"><CheckCircle className="w-5 h-5 text-primary mr-2" /> Soporte prioritario</li>
+              </ul>
+              <Button size="lg" className="w-full hover:scale-105 transition-transform duration-200" variant="outline" asChild>
+                <Link href="/contact">Contactar Ventas</Link>
+              </Button>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-16 scroll-mt-16 bg-gradient-to-b from-background to-muted/30 relative isolate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">
-            Comienza hoy mismo a optimizar tu trabajo
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
+            Transforma tu Pasión por el Fitness en un Negocio Exitoso
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            14 días de prueba gratis, sin compromiso
+          <p className="text-xl mb-8 text-muted-foreground max-w-2xl mx-auto">
+            Únete a cientos de entrenadores que ya están revolucionando su forma de trabajar. 
+            Comienza tu prueba gratuita de 14 días y descubre cómo Gym Track puede ayudarte a 
+            escalar tu negocio mientras mejoras la experiencia de tus clientes.
           </p>
-          <Button size="lg" variant="secondary">
-            Crear cuenta gratis
-          </Button>
+          <div className="flex flex-col items-center gap-4">
+            <Button size="lg" className="text-lg px-8 py-6 hover:scale-105 transition-transform duration-200" asChild>
+              <Link href="/sign-up">Comenzar Prueba Gratuita</Link>
+            </Button>
+            <p className="text-sm text-muted-foreground">
+              No se requiere tarjeta de crédito • Cancelación en cualquier momento
+            </p>
+          </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-8 border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted-foreground">
+          <p>&copy; 2024 Gym Track. Todos los derechos reservados.</p>
+        </div>
+      </footer>
     </main>
   );
 }
